@@ -13,7 +13,7 @@
 		EE4897141F187B5B00B43F7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE4897131F187B5B00B43F7D /* Assets.xcassets */; };
 		EE4897171F187B5B00B43F7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE4897151F187B5B00B43F7D /* LaunchScreen.storyboard */; };
 		EE4897211F187ECE00B43F7D /* PuzzleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4897201F187ECE00B43F7D /* PuzzleCollectionViewController.swift */; };
-		EE4897231F188C9C00B43F7D /* PuzzleFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4897221F188C9C00B43F7D /* PuzzleFlowLayout.swift */; };
+		EE82C35E1F211A000074FAA9 /* PuzzlePiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82C35D1F211A000074FAA9 /* PuzzlePiece.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,7 @@
 		EE4897161F187B5B00B43F7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE4897181F187B5B00B43F7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE4897201F187ECE00B43F7D /* PuzzleCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleCollectionViewController.swift; sourceTree = "<group>"; };
-		EE4897221F188C9C00B43F7D /* PuzzleFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleFlowLayout.swift; sourceTree = "<group>"; };
+		EE82C35D1F211A000074FAA9 /* PuzzlePiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzlePiece.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +61,11 @@
 				EE48970C1F187B5B00B43F7D /* AppDelegate.swift */,
 				EE48970E1F187B5B00B43F7D /* ViewController.swift */,
 				EE4897201F187ECE00B43F7D /* PuzzleCollectionViewController.swift */,
+				EE82C35D1F211A000074FAA9 /* PuzzlePiece.swift */,
 				EE4897101F187B5B00B43F7D /* Main.storyboard */,
 				EE4897131F187B5B00B43F7D /* Assets.xcassets */,
 				EE4897151F187B5B00B43F7D /* LaunchScreen.storyboard */,
 				EE4897181F187B5B00B43F7D /* Info.plist */,
-				EE4897221F188C9C00B43F7D /* PuzzleFlowLayout.swift */,
 			);
 			path = PuzzleGame;
 			sourceTree = "<group>";
@@ -143,7 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE48970F1F187B5B00B43F7D /* ViewController.swift in Sources */,
-				EE4897231F188C9C00B43F7D /* PuzzleFlowLayout.swift in Sources */,
+				EE82C35E1F211A000074FAA9 /* PuzzlePiece.swift in Sources */,
 				EE4897211F187ECE00B43F7D /* PuzzleCollectionViewController.swift in Sources */,
 				EE48970D1F187B5B00B43F7D /* AppDelegate.swift in Sources */,
 			);
@@ -309,6 +309,7 @@
 				EE48971D1F187B5B00B43F7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

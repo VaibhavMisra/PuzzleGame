@@ -9,31 +9,64 @@
 import UIKit
 
 private let reuseIdentifier = "Cell"
+private let rowCount = 3
+private let colCount = 4
 
 extension UIImage {
-    var topHalf: UIImage? {
-        guard let cgImage = cgImage, let image = cgImage.cropping(to: CGRect(origin: .zero, size: CGSize(width: size.width, height: size.height/2))) else { return nil }
-        return UIImage(cgImage: image, scale: 1, orientation: imageOrientation)
+    func getImageArray(forRows numRows:Int, columns numCols:Int) -> [UIImage]? {
+        let totalCount = numRows * numCols
+        var result = [UIImage](repeating: self, count: totalCount)
+        for rowIndex in 0..<numRows {
+            for colIndex in 0..<numCols {
+                
+                let width = self.size.width / CGFloat(numCols)
+                let height = self.size.height / CGFloat(numRows)
+                let size = CGSize(width: width, height: height)
+                
+                let origin = CGPoint(x: (CGFloat(colIndex) * width),
+                                     y: (CGFloat(rowIndex) * height))
+                
+                guard let cgImage = cgImage,
+                    let image = cgImage.cropping(to: CGRect(origin: origin,
+                                                            size: size))
+                    else { return nil }
+                let index = (rowIndex * numCols) + colIndex
+                result[index] = UIImage(cgImage: image)
+            }
+        }
+        return result
     }
-    var bottomHalf: UIImage? {
-        guard let cgImage = cgImage, let image = cgImage.cropping(to: CGRect(origin: CGPoint(x: 0,  y: CGFloat(Int(size.height)-Int(size.height/2))), size: CGSize(width: size.width, height: CGFloat(Int(size.height) - Int(size.height/2))))) else { return nil }
-        return UIImage(cgImage: image)
+}
+
+extension MutableCollection where Index == Int {
+    /// Shuffle the elements of `self` in-place.
+    mutating func shuffle() {
+        // empty and single-element collections don't shuffle
+        if count < 2 { return }
+        
+        for i in startIndex ..< endIndex - 1 {
+            let j = Int(arc4random_uniform(UInt32(endIndex - i))) + i
+            if i != j {
+                swap(&self[i], &self[j])
+            }
+        }
     }
-    var leftHalf: UIImage? {
-        guard let cgImage = cgImage, let image = cgImage.cropping(to: CGRect(origin: .zero, size: CGSize(width: size.width/2, height: size.height))) else { return nil }
-        return UIImage(cgImage: image)
-    }
-    var rightHalf: UIImage? {
-        guard let cgImage = cgImage, let image = cgImage.cropping(to: CGRect(origin: CGPoint(x: CGFloat(Int(size.width)-Int((size.width/2))), y: 0), size: CGSize(width: CGFloat(Int(size.width)-Int((size.width/2))), height: size.height)))
-            else { return nil }
-        return UIImage(cgImage: image)
+}
+
+public extension Array {
+    mutating func swap(ind1: Int, _ ind2: Int){
+        var temp: Element
+        temp = self[ind1]
+        self[ind1] = self[ind2]
+        self[ind2] = temp
     }
 }
 
 class PuzzleCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var image:UIImage?
-    var imageArray = [[UIImage]]()
+    var imageArray = [UIImage]()
+    var pieceArray = [PuzzlePiece]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +76,6 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
 
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
-//        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture))
-//        self.collectionView?.addGestureRecognizer(longPressGesture)
 
         // Do any additional setup after loading the view.
         DispatchQueue.global().async {
@@ -53,15 +83,16 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
                 let data = try? Data(contentsOf: imageURL),
                 let image = UIImage(data: data) {
                 
-                let topHalf = image.topHalf
-                let bottomHalf = image.bottomHalf
-                
-                if let topLeft = topHalf?.leftHalf,
-                    let topRight = topHalf?.rightHalf,
-                    let bottomLeft = bottomHalf?.leftHalf,
-                    let bottomRight = bottomHalf?.rightHalf {
-                    self.imageArray = [[topLeft, bottomLeft], [topRight, bottomRight]]
+                if let result = image.getImageArray(forRows: rowCount,
+                                                    columns: colCount) {
+                    self.imageArray = result
                     
+                    for (index, element) in self.imageArray.enumerated() {
+                        let piece = PuzzlePiece(image: element, correctIndex: index)
+                        self.pieceArray.append(piece)
+                    }
+                
+                    self.pieceArray.shuffle()
                     DispatchQueue.main.sync {
                         self.collectionView?.reloadData()
                     }
@@ -74,66 +105,30 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    // MARK: - Gesture recogniser
-//    @objc func handleLongGesture(gesture: UILongPressGestureRecognizer)
-//    {
-//        switch(gesture.state)
-//        {
-//            
-//        case .began:
-//            guard let selectedIndexPath = self.collectionView?.indexPathForItem(at: gesture.location(in: self.collectionView)) else
-//            {
-//                break
-//            }
-//            
-//            self.collectionView?.beginInteractiveMovementForItem(at: selectedIndexPath)
-//            
-//        case .changed:
-//            self.collectionView?.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
-//            
-//        case .ended:
-//            self.collectionView?.endInteractiveMovement()
-//            
-//        default:
-//            self.collectionView?.cancelInteractiveMovement()
-//        }
-//    }
     
     //MARK: - UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = Float((self.collectionView?.bounds.width)!)/Float(self.imageArray.count)
-        let height = Float((self.collectionView?.bounds.width)!)/Float(self.imageArray[indexPath.section].count)
+        let width = Float((self.collectionView?.bounds.width)! - CGFloat(colCount))/Float(colCount)
+        let height = Float((self.collectionView?.bounds.height)! - CGFloat(rowCount))/Float(rowCount)
         
         let size = CGSize(width: CGFloat(width),
                           height: CGFloat(height))
-        print("Size: \(size)")
         return size
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
+        return 1.0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
+        return 1.0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -141,19 +136,11 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
     }
 
     // MARK: UICollectionViewDataSource
-    
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
-        print("Sections: \(self.imageArray.count)")
-        return self.imageArray.count
-    }
-
 
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
         
-        print("Rows: \(self.imageArray[section].count)")
-        return self.imageArray[section].count
+        return self.imageArray.count /// rowCount
     }
 
     override func collectionView(_ collectionView: UICollectionView,
@@ -162,23 +149,50 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
         // Configure the cell
-        let imageView = UIImageView(image: self.imageArray[indexPath.section][indexPath.row])
+        let imageView = UIImageView(image: self.pieceArray[indexPath.row].image)
         cell.backgroundView = imageView
     
         return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+    override func collectionView(_ collectionView: UICollectionView,
+                                 canMoveItemAt indexPath: IndexPath) -> Bool {
         return true
     }
     
     override func collectionView(_ collectionView: UICollectionView,
                                  moveItemAt sourceIndexPath: IndexPath,
                                  to destinationIndexPath: IndexPath) {
-        let image = self.imageArray.remove(at: sourceIndexPath.item)
-        self.imageArray.insert(image, at: destinationIndexPath.item)
+
+        let piece = self.pieceArray.remove(at: sourceIndexPath.row)
+        self.pieceArray.insert(piece, at: destinationIndexPath.row)
+        let result = self.isSorted()
+        if result == true {
+            self.showCompletionAlert()
+        }
     }
 
+    //MARK: - Helper
+    
+    func isSorted() -> Bool {
+        for index in 1..<self.pieceArray.count {
+            if self.pieceArray[index - 1].correctIndex >= self.pieceArray[index].correctIndex {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func showCompletionAlert() {
+        let alert = UIAlertController(title: "Complete!", message: "",
+                                      preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(ok)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: UICollectionViewDelegate
     
     
