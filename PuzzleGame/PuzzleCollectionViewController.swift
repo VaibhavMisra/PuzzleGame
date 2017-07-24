@@ -76,6 +76,9 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
 
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action:  #selector(handleLongGesture(_:)))
+        self.collectionView?.addGestureRecognizer(longPressGesture)
 
         // Do any additional setup after loading the view.
         DispatchQueue.global().async {
@@ -173,6 +176,24 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
     }
 
     //MARK: - Helper
+    
+    func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
+        
+        switch(gesture.state) {
+            
+        case UIGestureRecognizerState.began:
+            guard let selectedIndexPath = self.collectionView?.indexPathForItem(at: gesture.location(in: self.collectionView)) else {
+                break
+            }
+            self.collectionView?.beginInteractiveMovementForItem(at: selectedIndexPath)
+        case UIGestureRecognizerState.changed:
+            self.collectionView?.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+        case UIGestureRecognizerState.ended:
+            self.collectionView?.endInteractiveMovement()
+        default:
+            self.collectionView?.cancelInteractiveMovement()
+        }
+    }
     
     func isSorted() -> Bool {
         for index in 1..<self.pieceArray.count {
