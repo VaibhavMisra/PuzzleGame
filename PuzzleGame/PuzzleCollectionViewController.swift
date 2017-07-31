@@ -67,6 +67,10 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
     var image:UIImage?
     var imageArray = [UIImage]()
     var pieceArray = [PuzzlePiece]()
+    
+    var padding: CGFloat {
+        return 1.0
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,13 +129,13 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1.0
+        return self.padding
     }
     
     func collectionView(_ collectionView: UICollectionView, layout
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 1.0
+        return self.padding
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
