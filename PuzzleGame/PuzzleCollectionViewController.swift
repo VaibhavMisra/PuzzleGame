@@ -64,12 +64,11 @@ public extension Array {
 
 class PuzzleCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var image: UIImage?
     var imageArray = [UIImage]()
     var pieceArray = [PuzzlePiece]()
     
     var padding: Int {
-        return 20
+        return 2
     }
 
     override func viewDidLoad() {
@@ -83,34 +82,6 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action:  #selector(handleLongGesture(_:)))
         self.collectionView?.addGestureRecognizer(longPressGesture)
-
-        // Do any additional setup after loading the view.
-        DispatchQueue.global().async {
-            if let imageURL = URL(string: "https://s3-eu-west-1.amazonaws.com/wagawin-ad-platform/media/testmode/banner-landscape.jpg"),
-                let data = try? Data(contentsOf: imageURL),
-                let image = UIImage(data: data) {
-                
-                if let result = image.getImageArray(forRows: rowCount,
-                                                    columns: colCount) {
-                    self.imageArray = result
-                    
-                    for (index, element) in self.imageArray.enumerated() {
-                        let piece = PuzzlePiece(image: element, correctIndex: index)
-                        self.pieceArray.append(piece)
-                    }
-                
-                    self.pieceArray.shuffle()
-                    DispatchQueue.main.sync {
-                        self.collectionView?.reloadData()
-                    }
-                }
-            }
-        }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //MARK: - UICollectionViewDelegateFlowLayout
@@ -180,6 +151,19 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
     }
 
     //MARK: - Helper
+    
+    func loadPuzzle(with image: UIImage?) {
+        if let result = image?.getImageArray(forRows: rowCount,
+                                            columns: colCount) {
+            self.imageArray = result
+            for (index, element) in self.imageArray.enumerated() {
+                let piece = PuzzlePiece(image: element, correctIndex: index)
+                self.pieceArray.append(piece)
+            }
+            self.pieceArray.shuffle()
+            self.collectionView?.reloadData()
+        }
+    }
     
     func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
         

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Yrm-RR-Whh">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,7 +24,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUu-Lv-Tdw">
                                 <rect key="frame" x="20" y="20" width="557" height="347"/>
                                 <connections>
-                                    <segue destination="b5p-tO-OSV" kind="embed" id="4Dr-ST-A0E"/>
+                                    <segue destination="b5p-tO-OSV" kind="embed" identifier="showPuzzle" id="92x-6S-Mjn"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1v-rt-2RQ">
@@ -46,16 +46,50 @@
                             <constraint firstItem="fUu-Lv-Tdw" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" symbolic="YES" id="pBb-s5-0hW"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="NKn-hQ-Hbj"/>
+                    <nil key="simulatedTopBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="274" y="116"/>
+            <point key="canvasLocation" x="1855.3223388305848" y="77.599999999999994"/>
+        </scene>
+        <!--Full Image View Controller-->
+        <scene sceneID="uCc-qI-FEb">
+            <objects>
+                <viewController storyboardIdentifier="fullImageVC" id="S00-vI-Irc" customClass="FullImageViewController" customModule="PuzzleGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HQu-na-N3q"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZaA-L1-klh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UFi-6C-9et">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P5w-ZX-wbg">
+                                <rect key="frame" x="20" y="20" width="627" height="347"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="P5w-ZX-wbg" secondAttribute="trailing" constant="20" symbolic="YES" id="3rs-DL-sJi"/>
+                            <constraint firstItem="P5w-ZX-wbg" firstAttribute="leading" secondItem="UFi-6C-9et" secondAttribute="leading" constant="20" symbolic="YES" id="Ag9-4M-KdQ"/>
+                            <constraint firstItem="ZaA-L1-klh" firstAttribute="top" secondItem="P5w-ZX-wbg" secondAttribute="bottom" constant="8" symbolic="YES" id="FVL-DK-X9J"/>
+                            <constraint firstItem="P5w-ZX-wbg" firstAttribute="top" secondItem="UFi-6C-9et" secondAttribute="top" constant="20" symbolic="YES" id="VH5-CY-Nix"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="P5w-ZX-wbg" id="AV0-NC-jRL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vGY-gb-3cU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1065" y="838"/>
         </scene>
         <!--Puzzle Collection View Controller-->
         <scene sceneID="7KU-XJ-n4t">
             <objects>
                 <collectionViewController id="b5p-tO-OSV" customClass="PuzzleCollectionViewController" customModule="PuzzleGame" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WU7-v1-0gc">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="WU7-v1-0gc">
                         <rect key="frame" x="0.0" y="0.0" width="557" height="347"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,7 +117,25 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uq4-fG-BDw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="962" y="139"/>
+            <point key="canvasLocation" x="2535.3823088455774" y="53.600000000000001"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vBd-yt-ehr">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yrm-RR-Whh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BDG-JW-Vbk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="UKO-vF-mOz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P4Y-i2-PRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1064.6176911544228" y="77.599999999999994"/>
         </scene>
     </scenes>
     <resources>
