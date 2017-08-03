@@ -64,12 +64,12 @@ public extension Array {
 
 class PuzzleCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var image:UIImage?
+    var image: UIImage?
     var imageArray = [UIImage]()
     var pieceArray = [PuzzlePiece]()
     
-    var padding: CGFloat {
-        return 1.0
+    var padding: Int {
+        return 20
     }
 
     override func viewDidLoad() {
@@ -118,8 +118,8 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = Float((self.collectionView?.bounds.width)! - CGFloat(colCount))/Float(colCount)
-        let height = Float((self.collectionView?.bounds.height)! - CGFloat(rowCount))/Float(rowCount)
+        let width = Float((self.collectionView?.bounds.width)! - CGFloat(colCount * self.padding))/Float(colCount)
+        let height = Float((self.collectionView?.bounds.height)! - CGFloat(rowCount * self.padding))/Float(rowCount)
         
         let size = CGSize(width: CGFloat(width),
                           height: CGFloat(height))
@@ -129,13 +129,13 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return self.padding
+        return CGFloat(self.padding)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return self.padding
+        return CGFloat(self.padding)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
