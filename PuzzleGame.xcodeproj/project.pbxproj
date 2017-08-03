@@ -13,6 +13,7 @@
 		EE4897141F187B5B00B43F7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE4897131F187B5B00B43F7D /* Assets.xcassets */; };
 		EE4897171F187B5B00B43F7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE4897151F187B5B00B43F7D /* LaunchScreen.storyboard */; };
 		EE4897211F187ECE00B43F7D /* PuzzleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4897201F187ECE00B43F7D /* PuzzleCollectionViewController.swift */; };
+		EE622F1E1F32E156005B337A /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE622F1D1F32E156005B337A /* FullImageViewController.swift */; };
 		EE82C35E1F211A000074FAA9 /* PuzzlePiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82C35D1F211A000074FAA9 /* PuzzlePiece.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		EE4897161F187B5B00B43F7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE4897181F187B5B00B43F7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE4897201F187ECE00B43F7D /* PuzzleCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleCollectionViewController.swift; sourceTree = "<group>"; };
+		EE622F1D1F32E156005B337A /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
 		EE82C35D1F211A000074FAA9 /* PuzzlePiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzlePiece.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +62,7 @@
 			children = (
 				EE48970C1F187B5B00B43F7D /* AppDelegate.swift */,
 				EE48970E1F187B5B00B43F7D /* ViewController.swift */,
+				EE622F1D1F32E156005B337A /* FullImageViewController.swift */,
 				EE4897201F187ECE00B43F7D /* PuzzleCollectionViewController.swift */,
 				EE82C35D1F211A000074FAA9 /* PuzzlePiece.swift */,
 				EE4897101F187B5B00B43F7D /* Main.storyboard */,
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE622F1E1F32E156005B337A /* FullImageViewController.swift in Sources */,
 				EE48970F1F187B5B00B43F7D /* ViewController.swift in Sources */,
 				EE82C35E1F211A000074FAA9 /* PuzzlePiece.swift in Sources */,
 				EE4897211F187ECE00B43F7D /* PuzzleCollectionViewController.swift in Sources */,
