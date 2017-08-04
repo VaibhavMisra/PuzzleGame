@@ -12,32 +12,6 @@ private let reuseIdentifier = "Cell"
 private let rowCount = 3
 private let colCount = 4
 
-extension UIImage {
-    func getImageArray(forRows numRows:Int, columns numCols:Int) -> [UIImage]? {
-        let totalCount = numRows * numCols
-        var result = [UIImage](repeating: self, count: totalCount)
-        for rowIndex in 0..<numRows {
-            for colIndex in 0..<numCols {
-                
-                let width = self.size.width / CGFloat(numCols)
-                let height = self.size.height / CGFloat(numRows)
-                let size = CGSize(width: width, height: height)
-                
-                let origin = CGPoint(x: (CGFloat(colIndex) * width),
-                                     y: (CGFloat(rowIndex) * height))
-                
-                guard let cgImage = cgImage,
-                    let image = cgImage.cropping(to: CGRect(origin: origin,
-                                                            size: size))
-                    else { return nil }
-                let index = (rowIndex * numCols) + colIndex
-                result[index] = UIImage(cgImage: image)
-            }
-        }
-        return result
-    }
-}
-
 extension MutableCollection where Index == Int {
     /// Shuffle the elements of `self` in-place.
     mutating func shuffle() {
@@ -153,7 +127,7 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
     //MARK: - Helper
     
     func loadPuzzle(with image: UIImage?) {
-        if let result = image?.getImageArray(forRows: rowCount,
+        if let result = image?.slice(forRows: rowCount,
                                             columns: colCount) {
             self.imageArray = result
             for (index, element) in self.imageArray.enumerated() {
