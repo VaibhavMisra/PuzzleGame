@@ -12,15 +12,22 @@ private let reuseIdentifier = "Cell"
 private let rowCount = 3
 private let colCount = 4
 
+protocol PuzzleCollectionDelegate: class {
+    func puzzlePieceMoved(from intialPos: Int, to finalPos: Int)
+    func puzzleSolved()
+}
+
 class PuzzleCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var imageArray = [UIImage]()
-    var pieceArray = [PuzzlePiece]()
+    //MARK: - Private properties
+    private var imageArray = [UIImage]()
+    private var pieceArray = [PuzzlePiece]()
     
-    var padding: Int {
-        return 2
-    }
+    //MARK: - Public properties
+    weak var puzzleDelegate: PuzzleCollectionDelegate?
+    var padding: Int = 2
 
+    //MARK: - View lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,6 +39,20 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action:  #selector(handleLongGesture(_:)))
         self.collectionView?.addGestureRecognizer(longPressGesture)
+    }
+    
+    //MARK: - Public method
+    func loadPuzzle(with image: UIImage?) {
+        if let result = image?.slice(forRows: rowCount,
+                                     columns: colCount) {
+            self.imageArray = result
+            for (index, element) in self.imageArray.enumerated() {
+                let piece = PuzzlePiece(image: element, correctIndex: index)
+                self.pieceArray.append(piece)
+            }
+            self.pieceArray.shuffle()
+            self.collectionView?.reloadData()
+        }
     }
     
     //MARK: - UICollectionViewDelegateFlowLayout
@@ -94,27 +115,17 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
 
         let piece = self.pieceArray.remove(at: sourceIndexPath.row)
         self.pieceArray.insert(piece, at: destinationIndexPath.row)
+        
+        self.puzzleDelegate?.puzzlePieceMoved(from: sourceIndexPath.row,
+                                              to: destinationIndexPath.row)
+        
         let result = self.isSorted()
         if result == true {
-            self.showCompletionAlert()
+            self.puzzleDelegate?.puzzleSolved()
         }
     }
 
-    //MARK: - Helper
-    
-    func loadPuzzle(with image: UIImage?) {
-        if let result = image?.slice(forRows: rowCount,
-                                            columns: colCount) {
-            self.imageArray = result
-            for (index, element) in self.imageArray.enumerated() {
-                let piece = PuzzlePiece(image: element, correctIndex: index)
-                self.pieceArray.append(piece)
-            }
-            self.pieceArray.shuffle()
-            self.collectionView?.reloadData()
-        }
-    }
-    
+    //MARK: - Gesture Handler
     func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
         
         switch(gesture.state) {
@@ -133,6 +144,7 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
         }
     }
     
+    //MARK: - Helper
     func isSorted() -> Bool {
         for index in 1..<self.pieceArray.count {
             if self.pieceArray[index - 1].correctIndex >= self.pieceArray[index].correctIndex {
@@ -141,47 +153,4 @@ class PuzzleCollectionViewController: UICollectionViewController, UICollectionVi
         }
         return true
     }
-    
-    func showCompletionAlert() {
-        let alert = UIAlertController(title: "Complete!", message: "",
-                                      preferredStyle: .alert)
-        
-        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(ok)
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    // MARK: UICollectionViewDelegate
-    
-    
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }
