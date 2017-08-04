@@ -25,7 +25,11 @@ class ViewController: UIViewController, PuzzleCollectionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
-        self.loadImage()
+        self.loadImage {
+            if let image = self.puzzleImage {
+                self.showFullImage(for: image, seconds: self.initialTime)
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -47,14 +51,16 @@ class ViewController: UIViewController, PuzzleCollectionDelegate {
     
     //MARK: - Helper
     
-    fileprivate func loadImage() {
+    fileprivate func loadImage(completion: (() -> Swift.Void)? = nil) {
         DispatchQueue.global().async {
             if let imageURL = URL(string: self.imageURL),
                 let data = try? Data(contentsOf: imageURL),
                 let image = UIImage(data: data) {
                 self.puzzleImage = image
-                DispatchQueue.main.async {
-                    self.showFullImage(for: image, seconds: self.initialTime)
+                if completion != nil {
+                    DispatchQueue.main.async {
+                        completion!()
+                    }
                 }
             }
         }
@@ -79,7 +85,6 @@ class ViewController: UIViewController, PuzzleCollectionDelegate {
         DispatchQueue.main.asyncAfter(deadline: when){
             self.dismiss(animated: true, completion: {
                 self.embedVC?.loadPuzzle(with: self.puzzleImage)
-                
             })
         }
     }
@@ -87,11 +92,9 @@ class ViewController: UIViewController, PuzzleCollectionDelegate {
     func showCompletionAlert() {
         let alert = UIAlertController(title: self.successMsg, message: "",
                                       preferredStyle: .alert)
-        
         let ok = UIAlertAction(title: self.successMsg,
                                style: .default, handler: nil)
         alert.addAction(ok)
-        
         self.present(alert, animated: true, completion: nil)
     }
 
