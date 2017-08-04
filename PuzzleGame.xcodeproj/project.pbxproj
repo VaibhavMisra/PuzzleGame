@@ -16,6 +16,7 @@
 		EE622F1E1F32E156005B337A /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE622F1D1F32E156005B337A /* FullImageViewController.swift */; };
 		EE622F211F34241B005B337A /* UIImage+Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE622F201F34241B005B337A /* UIImage+Slice.swift */; };
 		EE622F251F3427E9005B337A /* Array+swap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE622F241F3427E9005B337A /* Array+swap.swift */; };
+		EE622F271F34287A005B337A /* MutableCollection+shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE622F261F34287A005B337A /* MutableCollection+shuffle.swift */; };
 		EE82C35E1F211A000074FAA9 /* PuzzlePiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82C35D1F211A000074FAA9 /* PuzzlePiece.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		EE622F1D1F32E156005B337A /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
 		EE622F201F34241B005B337A /* UIImage+Slice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Slice.swift"; sourceTree = "<group>"; };
 		EE622F241F3427E9005B337A /* Array+swap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+swap.swift"; sourceTree = "<group>"; };
+		EE622F261F34287A005B337A /* MutableCollection+shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MutableCollection+shuffle.swift"; sourceTree = "<group>"; };
 		EE82C35D1F211A000074FAA9 /* PuzzlePiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzlePiece.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,12 +66,10 @@
 		EE48970B1F187B5B00B43F7D /* PuzzleGame */ = {
 			isa = PBXGroup;
 			children = (
-				EE622F1F1F342318005B337A /* Helpers */,
+				EE622F281F3428C4005B337A /* PuzzleScene */,
 				EE48970C1F187B5B00B43F7D /* AppDelegate.swift */,
 				EE48970E1F187B5B00B43F7D /* ViewController.swift */,
 				EE622F1D1F32E156005B337A /* FullImageViewController.swift */,
-				EE4897201F187ECE00B43F7D /* PuzzleCollectionViewController.swift */,
-				EE82C35D1F211A000074FAA9 /* PuzzlePiece.swift */,
 				EE4897101F187B5B00B43F7D /* Main.storyboard */,
 				EE4897131F187B5B00B43F7D /* Assets.xcassets */,
 				EE4897151F187B5B00B43F7D /* LaunchScreen.storyboard */,
@@ -83,8 +83,19 @@
 			children = (
 				EE622F201F34241B005B337A /* UIImage+Slice.swift */,
 				EE622F241F3427E9005B337A /* Array+swap.swift */,
+				EE622F261F34287A005B337A /* MutableCollection+shuffle.swift */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		EE622F281F3428C4005B337A /* PuzzleScene */ = {
+			isa = PBXGroup;
+			children = (
+				EE622F1F1F342318005B337A /* Helpers */,
+				EE4897201F187ECE00B43F7D /* PuzzleCollectionViewController.swift */,
+				EE82C35D1F211A000074FAA9 /* PuzzlePiece.swift */,
+			);
+			name = PuzzleScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE622F271F34287A005B337A /* MutableCollection+shuffle.swift in Sources */,
 				EE622F211F34241B005B337A /* UIImage+Slice.swift in Sources */,
 				EE622F1E1F32E156005B337A /* FullImageViewController.swift in Sources */,
 				EE48970F1F187B5B00B43F7D /* ViewController.swift in Sources */,
