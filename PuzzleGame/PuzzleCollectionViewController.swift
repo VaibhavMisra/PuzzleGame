@@ -27,15 +27,6 @@ extension MutableCollection where Index == Int {
     }
 }
 
-public extension Array {
-    mutating func swap(ind1: Int, _ ind2: Int){
-        var temp: Element
-        temp = self[ind1]
-        self[ind1] = self[ind2]
-        self[ind2] = temp
-    }
-}
-
 class PuzzleCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var imageArray = [UIImage]()

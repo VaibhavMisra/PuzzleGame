@@ -15,6 +15,7 @@
 		EE4897211F187ECE00B43F7D /* PuzzleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4897201F187ECE00B43F7D /* PuzzleCollectionViewController.swift */; };
 		EE622F1E1F32E156005B337A /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE622F1D1F32E156005B337A /* FullImageViewController.swift */; };
 		EE622F211F34241B005B337A /* UIImage+Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE622F201F34241B005B337A /* UIImage+Slice.swift */; };
+		EE622F251F3427E9005B337A /* Array+swap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE622F241F3427E9005B337A /* Array+swap.swift */; };
 		EE82C35E1F211A000074FAA9 /* PuzzlePiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE82C35D1F211A000074FAA9 /* PuzzlePiece.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		EE4897201F187ECE00B43F7D /* PuzzleCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleCollectionViewController.swift; sourceTree = "<group>"; };
 		EE622F1D1F32E156005B337A /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
 		EE622F201F34241B005B337A /* UIImage+Slice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Slice.swift"; sourceTree = "<group>"; };
+		EE622F241F3427E9005B337A /* Array+swap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+swap.swift"; sourceTree = "<group>"; };
 		EE82C35D1F211A000074FAA9 /* PuzzlePiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzlePiece.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				EE622F201F34241B005B337A /* UIImage+Slice.swift */,
+				EE622F241F3427E9005B337A /* Array+swap.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				EE622F1E1F32E156005B337A /* FullImageViewController.swift in Sources */,
 				EE48970F1F187B5B00B43F7D /* ViewController.swift in Sources */,
 				EE82C35E1F211A000074FAA9 /* PuzzlePiece.swift in Sources */,
+				EE622F251F3427E9005B337A /* Array+swap.swift in Sources */,
 				EE4897211F187ECE00B43F7D /* PuzzleCollectionViewController.swift in Sources */,
 				EE48970D1F187B5B00B43F7D /* AppDelegate.swift in Sources */,
 			);
