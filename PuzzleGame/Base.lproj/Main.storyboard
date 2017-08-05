@@ -66,15 +66,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P5w-ZX-wbg">
-                                <rect key="frame" x="20" y="20" width="627" height="347"/>
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="P5w-ZX-wbg" secondAttribute="trailing" constant="20" symbolic="YES" id="3rs-DL-sJi"/>
-                            <constraint firstItem="P5w-ZX-wbg" firstAttribute="leading" secondItem="UFi-6C-9et" secondAttribute="leading" constant="20" symbolic="YES" id="Ag9-4M-KdQ"/>
-                            <constraint firstItem="ZaA-L1-klh" firstAttribute="top" secondItem="P5w-ZX-wbg" secondAttribute="bottom" constant="8" symbolic="YES" id="FVL-DK-X9J"/>
-                            <constraint firstItem="P5w-ZX-wbg" firstAttribute="top" secondItem="UFi-6C-9et" secondAttribute="top" constant="20" symbolic="YES" id="VH5-CY-Nix"/>
+                            <constraint firstAttribute="trailing" secondItem="P5w-ZX-wbg" secondAttribute="trailing" id="3rs-DL-sJi"/>
+                            <constraint firstItem="P5w-ZX-wbg" firstAttribute="leading" secondItem="UFi-6C-9et" secondAttribute="leading" id="Ag9-4M-KdQ"/>
+                            <constraint firstItem="ZaA-L1-klh" firstAttribute="top" secondItem="P5w-ZX-wbg" secondAttribute="bottom" id="FVL-DK-X9J"/>
+                            <constraint firstItem="P5w-ZX-wbg" firstAttribute="top" secondItem="UFi-6C-9et" secondAttribute="top" id="VH5-CY-Nix"/>
                         </constraints>
                     </view>
                     <connections>
@@ -89,7 +89,7 @@
         <scene sceneID="7KU-XJ-n4t">
             <objects>
                 <collectionViewController id="b5p-tO-OSV" customClass="PuzzleCollectionViewController" customModule="PuzzleGame" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="WU7-v1-0gc">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WU7-v1-0gc">
                         <rect key="frame" x="0.0" y="0.0" width="557" height="347"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
