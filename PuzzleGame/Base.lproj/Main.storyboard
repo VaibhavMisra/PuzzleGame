@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -68,22 +69,35 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P5w-ZX-wbg">
                                 <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0Z-FE-0tj">
+                                <rect key="frame" x="233" y="87" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="HLY-K1-khK"/>
+                                    <constraint firstAttribute="width" secondItem="D0Z-FE-0tj" secondAttribute="height" multiplier="1:1" id="mFW-us-Y0O"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="150"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="P5w-ZX-wbg" secondAttribute="trailing" id="3rs-DL-sJi"/>
                             <constraint firstItem="P5w-ZX-wbg" firstAttribute="leading" secondItem="UFi-6C-9et" secondAttribute="leading" id="Ag9-4M-KdQ"/>
+                            <constraint firstItem="D0Z-FE-0tj" firstAttribute="centerY" secondItem="UFi-6C-9et" secondAttribute="centerY" id="CK6-4L-fBz"/>
                             <constraint firstItem="ZaA-L1-klh" firstAttribute="top" secondItem="P5w-ZX-wbg" secondAttribute="bottom" id="FVL-DK-X9J"/>
                             <constraint firstItem="P5w-ZX-wbg" firstAttribute="top" secondItem="UFi-6C-9et" secondAttribute="top" id="VH5-CY-Nix"/>
+                            <constraint firstItem="D0Z-FE-0tj" firstAttribute="centerX" secondItem="UFi-6C-9et" secondAttribute="centerX" id="dyX-ZS-awF"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="P5w-ZX-wbg" id="AV0-NC-jRL"/>
+                        <outlet property="timerLabel" destination="D0Z-FE-0tj" id="Tup-Dg-qes"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vGY-gb-3cU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1065" y="838"/>
+            <point key="canvasLocation" x="1064.6176911544228" y="837.60000000000002"/>
         </scene>
         <!--Puzzle Collection View Controller-->
         <scene sceneID="7KU-XJ-n4t">

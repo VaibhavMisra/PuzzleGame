@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, PuzzleCollectionDelegate {
+class ViewController: UIViewController, PuzzleCollectionDelegate, FullImageDelegate {
 
     var puzzleImage: UIImage?
     weak var embedVC:PuzzleCollectionViewController?
@@ -49,6 +49,12 @@ class ViewController: UIViewController, PuzzleCollectionDelegate {
         self.showCompletionAlert()
     }
     
+    //MARK: - FullImageDelegate
+    func timerDidFinish() {
+        self.embedVC?.loadPuzzle(with: self.puzzleImage)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     //MARK: - Helper
     
     fileprivate func loadImage(completion: (() -> Swift.Void)? = nil) {
@@ -72,20 +78,13 @@ class ViewController: UIViewController, PuzzleCollectionDelegate {
         if let fullImageVC =
             storyboard.instantiateViewController(withIdentifier: self.fullImageSBId)
                 as? FullImageViewController {
+            fullImageVC.delegate = self
             fullImageVC.image = image
+            fullImageVC.timeToShow = self.initialTime
             fullImageVC.modalTransitionStyle = .crossDissolve
             self.navigationController?.present(fullImageVC,
-                                               animated: true, completion: nil)
-            self.dismissFullImageView(in: seconds)
-        }
-    }
-    
-    fileprivate func dismissFullImageView(in seconds: Double) {
-        let when = DispatchTime.now() + seconds
-        DispatchQueue.main.asyncAfter(deadline: when){
-            self.dismiss(animated: true, completion: {
-                self.embedVC?.loadPuzzle(with: self.puzzleImage)
-            })
+                                               animated: true,
+                                               completion: nil)
         }
     }
     
